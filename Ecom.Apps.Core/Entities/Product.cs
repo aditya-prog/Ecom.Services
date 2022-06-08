@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Ecom.API.Rest.Entities
+namespace Ecom.Apps.Core.Entities
 {
     public class Product
     {
@@ -9,7 +9,6 @@ namespace Ecom.API.Rest.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
         public string ProductName { get; set; }
     }
 }

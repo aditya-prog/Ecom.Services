@@ -1,8 +1,7 @@
-﻿using Ecom.API.Rest.Entities;
+﻿using Ecom.Apps.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
 
-namespace Ecom.API.Rest.Data
+namespace Ecom.Apps.Infrastructure.Data
 {
     // we are abstracting our database away from our code using db context / ORM tool
     // we do  not directly query our db, we use dbContext methods to query db
