@@ -12,4 +12,8 @@
     <ProjectReference Include="..\Ecom.Apps.Core\Ecom.Apps.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\SeedData\" />
+  </ItemGroup>
+
 </Project>

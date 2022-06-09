@@ -1,5 +1,6 @@
 ﻿using Ecom.Apps.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Ecom.Apps.Infrastructure.Data
 {
@@ -17,5 +18,18 @@ namespace Ecom.Apps.Infrastructure.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductBrand> ProductBrands { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
+
+        // when we create our migration , this is the method responsible for creating that migration
+        // so we override this method and will ask it to look for our configurations
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // base is the class we are deriving from i.e DbContext class
+            base.OnModelCreating(modelBuilder);
+            // Below code will read our entity configurations for generating migrations
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }

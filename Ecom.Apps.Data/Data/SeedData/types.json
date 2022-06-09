@@ -1,0 +1,18 @@
+[
+  {
+    "Id": 1,
+    "ProductTypeName": "Boards"
+  },
+  {
+    "Id": 2,
+    "ProductTypeName": "Hats"
+  },
+  {
+    "Id": 3,
+    "ProductTypeName": "Boots"
+  },
+  {
+    "Id": 4,
+    "ProductTypeName": "Gloves"
+  }
+]

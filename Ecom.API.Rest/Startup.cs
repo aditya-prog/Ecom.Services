@@ -1,3 +1,4 @@
+using Ecom.Apps.Core.Interfaces;
 using Ecom.Apps.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,8 @@ namespace Ecom.API.Rest
             services.AddDbContext<StoreContext>(x =>
                     x.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IProductRepository, ProductRepository>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ecom.API.Rest", Version = "v1" });
@@ -44,6 +47,7 @@ namespace Ecom.API.Rest
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ecom.API.Rest v1"));
             }
 
+            // All are middleware and their ordering matters
             app.UseHttpsRedirection();
 
             app.UseRouting();
