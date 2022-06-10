@@ -30,6 +30,8 @@ namespace Ecom.API.Rest
                     x.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            // Generics are registered like below in service container
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.AddSwaggerGen(c =>
             {
