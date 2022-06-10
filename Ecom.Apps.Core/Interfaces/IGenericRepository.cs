@@ -1,4 +1,5 @@
 ﻿using Ecom.Apps.Core.Entities;
+using Ecom.Apps.Core.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,8 @@ namespace Ecom.Apps.Core.Interfaces
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
+
+        Task<T> GetEntityWithSpec(ISpecification<T> spec);
+        Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
     }
 }
