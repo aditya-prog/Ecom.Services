@@ -1,5 +1,6 @@
 ﻿using Ecom.Apps.Core.Entities;
 using Ecom.Apps.Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,22 @@ namespace Ecom.Apps.Infrastructure.Data
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        public Task<T> GetByIdAsync(int id)
+        private readonly StoreContext _context;
+
+        public GenericRepository(StoreContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<IReadOnlyList<T>> ListAllAsync()
+        // will fetch products/ brands/ types by their id 
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<IReadOnlyList<T>> ListAllAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
         }
     }
 }
