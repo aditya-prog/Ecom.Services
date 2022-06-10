@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ecom.Apps.Core.Interfaces;
+using Ecom.Apps.Core.Specifications;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -30,14 +31,18 @@ namespace Ecom.API.Rest.Controllers
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
         {
-            return Ok(await _productsRepo.ListAllAsync());
+            // return Ok(await _productsRepo.ListAllAsync());
+
+            var spec = new ProductsWithTypesAndBrandsSpecification();
+            return Ok(await _productsRepo.ListAsync(spec));
         }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return await _productsRepo.GetByIdAsync(id);
+            var spec = new ProductsWithTypesAndBrandsSpecification(id);
+            return await _productsRepo.GetEntityWithSpec(spec);
         }
 
         [HttpGet("brands")]
