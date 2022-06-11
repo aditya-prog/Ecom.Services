@@ -1,3 +1,5 @@
+using AutoMapper;
+using Ecom.API.Rest.Helpers;
 using Ecom.Apps.Core.Interfaces;
 using Ecom.Apps.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +34,8 @@ namespace Ecom.API.Rest
             services.AddScoped<IProductRepository, ProductRepository>();
             // Generics are registered like below in service container
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddSwaggerGen(c =>
             {
