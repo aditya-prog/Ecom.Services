@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Ecom.Apps.Data\Ecom.Apps.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

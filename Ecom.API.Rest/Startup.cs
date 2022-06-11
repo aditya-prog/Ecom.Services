@@ -57,6 +57,9 @@ namespace Ecom.API.Rest
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            // Used so that our api can serve static content like images present in wwwroot folder
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
