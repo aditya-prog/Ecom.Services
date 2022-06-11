@@ -14,7 +14,8 @@ namespace Ecom.API.Rest.Helpers
         {
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(d => d.ProductBrand, options => options.MapFrom(src => src.ProductBrand.BrandName))
-                .ForMember(d => d.ProductType, options => options.MapFrom(src => src.ProductType.ProductTypeName));
+                .ForMember(d => d.ProductType, options => options.MapFrom(src => src.ProductType.ProductTypeName))
+                .ForMember(d => d.PictureUrl, options => options.MapFrom<ProductUrlResolver>());
         }
     }
 }
