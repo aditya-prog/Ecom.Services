@@ -1,4 +1,5 @@
-﻿using Ecom.Apps.Infrastructure.Data;
+﻿using Ecom.API.Rest.Errors;
+using Ecom.Apps.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Ecom.API.Rest.Controllers
 
             if(thing == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
             return Ok();
         }
@@ -45,7 +46,7 @@ namespace Ecom.API.Rest.Controllers
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new ApiResponse(400));
         }
 
         [HttpGet("badrequest/{id}")]
