@@ -8,6 +8,12 @@ namespace Ecom.API.Rest.Controllers
 {
     [Route("errors/{statusCode}")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]  // For fixing swagger error(as we haven't assigned any httpMethod to below API),
+                                             // so, we want to ignore below API for swagger documentation as this api
+                                             // is not exposed externally but will be used internally
+                                             // Simply, Ignore APIs of this controller for documentation, that's all
+                                             // But still we can make call directly to this api through postman
+                                              
     public class ErrorController : ControllerBase
     {
         // Below method is executed when requested endPoint is not found and our middleware

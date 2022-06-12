@@ -6,6 +6,9 @@ using Ecom.Apps.Core.Interfaces;
 using Ecom.Apps.Core.Specifications;
 using Ecom.API.Rest.Dtos;
 using AutoMapper;
+using Ecom.API.Rest.Errors;
+using System.Net;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,10 +43,17 @@ namespace Ecom.API.Rest.Controllers
 
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ProductToReturnDto), StatusCodes.Status200OK)]  // for swagger documentation
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)] 
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product =  await _productsRepo.GetEntityWithSpec(spec);
+
+            if(product == null)
+            {
+                return NotFound(new ApiResponse((int)HttpStatusCode.NotFound));
+            }
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
 
