@@ -8,7 +8,7 @@
             Message = message ?? GetDefaultMessageForStatusCode(statusCode);
         }
 
-        private string GetDefaultMessageForStatusCode(int statusCode)
+        private static string GetDefaultMessageForStatusCode(int statusCode)
         {
             return statusCode switch
             {

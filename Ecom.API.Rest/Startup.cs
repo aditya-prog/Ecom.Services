@@ -1,5 +1,6 @@
 using AutoMapper;
 using Ecom.API.Rest.Helpers;
+using Ecom.API.Rest.Middleware;
 using Ecom.Apps.Core.Interfaces;
 using Ecom.Apps.Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -46,9 +47,14 @@ namespace Ecom.API.Rest
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Right at the top , we add our exception handling middleware and also comment out DeveloperExPage
+            // else that middleware will run instead of our custom exception handling middleware
+            
+            app.UseMiddleware<ExceptionMiddleware>(); // Handling exception or Internal server error
+
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                // app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ecom.API.Rest v1"));
             }
