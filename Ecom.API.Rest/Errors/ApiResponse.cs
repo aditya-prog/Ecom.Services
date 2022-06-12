@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Ecom.API.Rest.Errors
+﻿namespace Ecom.API.Rest.Errors
 {
     public class ApiResponse
     {

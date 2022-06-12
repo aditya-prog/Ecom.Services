@@ -1,9 +1,6 @@
-﻿using Ecom.Apps.Infrastructure.Data;
-using Ecom.Apps.Core.Entities;
+﻿using Ecom.Apps.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Ecom.Apps.Core.Interfaces;
 using Ecom.Apps.Core.Specifications;

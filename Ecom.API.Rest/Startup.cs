@@ -53,6 +53,25 @@ namespace Ecom.API.Rest
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ecom.API.Rest v1"));
             }
 
+            // If any api end point is not found, then re-execute the request pipeline using an alt path
+            // {0} is a placeholder for status code
+            /**
+            returns below response 
+            {
+                "statusCode": 404,
+                "message": "Requested End Point doesn't exists"
+            }
+             Along with status code 404 - NotFound
+            **/
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
+            // Below code also behave similar to above and also returns same response object as above
+            // but with status code 200 - Ok, which is not right thing becoz we have encountered error 
+
+            // app.UseStatusCodePagesWithRedirects("/errors/{0}");
+
+
+
             // All are middleware and their ordering matters
             app.UseHttpsRedirection();
 
