@@ -16,6 +16,23 @@ namespace Ecom.Apps.Infrastructure.Data
                 // spec.Criteria is actually the lambda expression required inside where clause
                 query = query.Where(spec.Criteria);
             }
+
+            if (spec.OrderBy != null)
+            {
+                query = query.OrderBy(spec.OrderBy);
+            }
+
+            if (spec.OrderByDescending != null)
+            {
+                query = query.OrderByDescending(spec.OrderByDescending);
+            }
+
+            if (spec.IsPagingEnabled)
+            {
+                query = query.Skip(spec.Skip).Take(spec.Take);
+            }
+
+
             // query inside aggregate method is the initial accumulator value of type IQueryable<TEntity>,
             // and query and current are of same type => IQueryable<TEntity>
             // Return final accumulator value of type IQueryable<TEntity>

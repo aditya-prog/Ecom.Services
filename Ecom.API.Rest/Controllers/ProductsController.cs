@@ -9,6 +9,7 @@ using AutoMapper;
 using Ecom.API.Rest.Errors;
 using System.Net;
 using Microsoft.AspNetCore.Http;
+using Ecom.API.Rest.Helpers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,12 +34,23 @@ namespace Ecom.API.Rest.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams)
         {
           
-            var spec = new ProductsWithTypesAndBrandsSpecification();
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var countSpec = new ProductsWithFiltersForCountSpecification(productParams);
             var productList = await _productsRepo.ListAsync(spec);
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(productList));
+            var totalCount = await _productsRepo.CountAsync(countSpec);
+
+            var result = new Pagination<ProductToReturnDto>()
+            {
+                PageSize = (int)productParams.PageSize,
+                PageIndex = (int)productParams.PageIndex,
+                Count = totalCount,
+                Data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(productList)
+            };
+
+            return Ok(result);
         }
 
 
