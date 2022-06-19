@@ -1,5 +1,4 @@
 ﻿using Ecom.Apps.Core.Entities;
-using System.strin
 
 namespace Ecom.Apps.Core.Specifications
 {

@@ -34,6 +34,13 @@ namespace Ecom.API.Rest
             // Call the extension method for configuring the essential services
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +74,7 @@ namespace Ecom.API.Rest
             
             // Used so that our api can serve static content like images present in wwwroot folder
             app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
