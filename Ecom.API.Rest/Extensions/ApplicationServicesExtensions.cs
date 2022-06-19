@@ -15,6 +15,8 @@ namespace Ecom.API.Rest.Extensions
             // Generics are registered like below in service container
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
+            services.AddScoped<IBasketRepository, BasketRepository>();
+
             // Below configuration is just for improving/customizing validation error response
             // Improving means instead of returning dictionary of Validationerrors, we will flatten it out
             // and return list of Validation errors

@@ -40,7 +40,7 @@ namespace Ecom.API.Rest
            });
             services.AddAutoMapper(typeof(MappingProfiles));
             
-            // Call the extension method for configuring the essential services
+            // Call the extension method for configuring the essential services including DI
             services.AddApplicationServices();
             services.AddSwaggerDocumentation();
             services.AddCors(opt =>
