@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ecom.API.Rest.Extensions;
+using StackExchange.Redis;
 
 namespace Ecom.API.Rest
 {
@@ -29,6 +30,14 @@ namespace Ecom.API.Rest
             // Store context is registered as a service , so we can inject it in constructors
             services.AddDbContext<StoreContext>(x =>
                     x.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
+
+            // Redis connection is designed to be shared and reused b/w callers and is fully thread safe, so it
+            // is made singleton
+            services.AddSingleton<ConnectionMultiplexer>(c =>
+           {
+               var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
+               return ConnectionMultiplexer.Connect(configuration);
+           });
             services.AddAutoMapper(typeof(MappingProfiles));
             
             // Call the extension method for configuring the essential services
