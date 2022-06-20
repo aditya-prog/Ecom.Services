@@ -33,7 +33,7 @@ namespace Ecom.API.Rest
 
             // Redis connection is designed to be shared and reused b/w callers and is fully thread safe, so it
             // is made singleton
-            services.AddSingleton<ConnectionMultiplexer>(c =>
+            services.AddSingleton<IConnectionMultiplexer>(c =>
            {
                var configuration = ConfigurationOptions.Parse(_configuration.GetConnectionString("Redis"), true);
                return ConnectionMultiplexer.Connect(configuration);
